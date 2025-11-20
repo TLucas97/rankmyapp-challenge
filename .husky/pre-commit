@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd "$(dirname "$(dirname "$0")")" || exit
+
+echo "Running build"
+if command -v bun >/dev/null 2>&1; then
+  bun run build
+else
+  npm run build
+fi
+
+if [ $? -ne 0 ]; then
+  echo "Build failed. Commit aborted."
+  exit 1
+fi
+
+echo "Build passed"
+echo ""
+echo "Running tests with coverage"
+npx jest --coverage
+
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Commit aborted."
+  exit 1
+fi
+
+echo "All checks passed"
+
