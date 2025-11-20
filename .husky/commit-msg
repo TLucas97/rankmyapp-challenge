@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd "$(dirname "$(dirname "$0")")" || exit
+
+if [ -f "./node_modules/@commitlint/cli/lib/cli.js" ]; then
+  node ./node_modules/@commitlint/cli/lib/cli.js --edit "$1"
+elif command -v bunx >/dev/null 2>&1; then
+  bunx commitlint --edit "$1"
+elif [ -f "./node_modules/.bin/commitlint" ]; then
+  ./node_modules/.bin/commitlint --edit "$1"
+else
+  echo "Error: commitlint not found. Please run 'bun install' to install dependencies."
+  exit 1
+fi
