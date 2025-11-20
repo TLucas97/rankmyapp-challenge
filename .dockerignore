@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+coverage
+.git
+.gitignore
+.env*.local
+.vercel
+.DS_Store
+*.log
+cypress
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+

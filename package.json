@@ -11,8 +11,7 @@
     "prepare": "husky install",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
-    "test:coverage": "npx jest --coverage",
-    "test:bun": "echo '⚠️  Use \"npm test\" ou \"npx jest\" para garantir que a configuração do Jest seja respeitada. O \"bun test\" pode não ignorar a pasta /mocks corretamente.' && bun test --ignore mocks"
+    "test:coverage": "npx jest --coverage"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
