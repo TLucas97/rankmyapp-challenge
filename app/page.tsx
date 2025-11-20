@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,11 +10,14 @@ import { Input } from "@/components/ui/input";
 export default function Home() {
     const [username, setUsername] = useState("");
     const router = useRouter();
+    const [isPending, startTransition] = useTransition();
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (username.trim()) {
-            router.push(`/p/${encodeURIComponent(username.trim())}`);
+            startTransition(() => {
+                router.push(`/p/${encodeURIComponent(username.trim())}`);
+            });
         }
     };
 
@@ -36,9 +39,13 @@ export default function Home() {
                         inputSize="lg"
                         className="flex-1"
                     />
-                    <Button type="submit" size="lg">
-                        <Search className="size-4" />
-                        Search
+                    <Button type="submit" size="lg" disabled={isPending}>
+                        {isPending ? (
+                            <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                            <Search className="size-4" />
+                        )}
+                        {isPending ? "Searching..." : "Search"}
                     </Button>
                 </form>
             </div>
