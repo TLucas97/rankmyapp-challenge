@@ -1,7 +1,9 @@
-import UserProfile from "@/components/UserProfile";
-import { computeLanguageInsights, getRepos, getUser } from "@/lib/gh";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+import UserProfile from "@/components/UserProfile";
+import { getRepos, getUser } from "@/lib/gh";
+import { aggregateLangStats } from "@/lib/utils";
 
 type Params = {
     params: Promise<{ username: string }>;
@@ -68,7 +70,7 @@ export default async function UserPage({ params }: Params) {
             getRepos(decodedUsername),
         ]);
 
-        const { byLanguageCount, starsByLanguage } = computeLanguageInsights(repos);
+        const { byLanguageCount, starsByLanguage } = aggregateLangStats(repos);
 
         return (
             <UserProfile
@@ -82,4 +84,3 @@ export default async function UserPage({ params }: Params) {
         redirect("/failed");
     }
 }
-

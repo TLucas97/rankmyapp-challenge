@@ -17,13 +17,10 @@ export default function UserProfile({
     starsByLanguage,
 }: UserProfileProps) {
     return (
-        <div className="max-w-7xl mx-auto h-[calc(100vh-2rem)] lg:h-[calc(100vh-2rem)] min-h-screen lg:min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4 px-4 lg:px-0">
-            <div className="flex flex-col gap-4 relative">
+        <div className="mx-auto mt-4 grid h-[calc(100vh-2rem)] min-h-screen max-w-7xl grid-cols-1 gap-4 px-4 lg:h-[calc(100vh-2rem)] lg:min-h-0 lg:grid-cols-2 lg:px-0">
+            <div className="relative flex flex-col gap-4">
                 <UserCard user={user} />
-                <ChartCard
-                    byLanguageCount={byLanguageCount}
-                    starsByLanguage={starsByLanguage}
-                />
+                <ChartCard byLanguageCount={byLanguageCount} starsByLanguage={starsByLanguage} />
             </div>
 
             <ReposCard repos={repos} />

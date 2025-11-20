@@ -4,14 +4,11 @@ import { GHRepo } from "./types";
 const randomInt = (min: number, max: number): number =>
     Math.floor(Math.random() * (max - min + 1)) + min;
 
-const randomChoice = <T>(arr: readonly T[]): T =>
-    arr[randomInt(0, arr.length - 1)];
+const randomChoice = <T>(arr: readonly T[]): T => arr[randomInt(0, arr.length - 1)];
 
-const randomWord = () =>
-    Math.random().toString(36).substring(2, 8);
+const randomWord = () => Math.random().toString(36).substring(2, 8);
 
-const randomSentence = (words = 6) =>
-    Array.from({ length: words }, randomWord).join(" ");
+const randomSentence = (words = 6) => Array.from({ length: words }, randomWord).join(" ");
 
 const randomDateISO = () =>
     new Date(Date.now() - randomInt(0, 1000 * 60 * 60 * 24 * 365)).toISOString();

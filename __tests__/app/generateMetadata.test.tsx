@@ -4,7 +4,6 @@ import { getUser } from '@/lib/gh';
 jest.mock('@/lib/gh', () => ({
     getUser: jest.fn(),
     getRepos: jest.fn(),
-    computeLanguageInsights: jest.fn(),
 }));
 
 const mockUser = {

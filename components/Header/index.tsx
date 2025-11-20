@@ -1,14 +1,15 @@
 import Link from "next/link";
+
 import { ModeToggle } from "./ModeToggle";
 
 export function Header() {
     return (
-        <header className="flex items-center justify-between w-full px-4 py-2 border-b mx-auto sticky top-0 bg-background z-10">
-            <div className="max-w-7xl w-full flex justify-between mx-auto">
+        <header className="bg-background sticky top-0 z-10 mx-auto flex w-full items-center justify-between border-b px-4 py-2">
+            <div className="mx-auto flex w-full max-w-7xl justify-between">
                 <div className="flex items-center">
                     <Link href="/">
                         <svg
-                            className="w-8 h-8"
+                            className="h-8 w-8"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
@@ -26,4 +27,3 @@ export function Header() {
         </header>
     );
 }
-

@@ -1,10 +1,11 @@
 "use client";
 
-import { makeFakeRepo } from "@/lib/gh/fake";
-import { GHRepo } from "@/lib/gh/types";
+import { useEffect, useState } from "react";
 import { Book, Plus } from "lucide-react";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+
+import { makeFakeRepo } from "@/lib/gh/fake";
+import { GHRepo } from "@/lib/gh/types";
 import { Repository } from "./Repository";
 
 type ReposCardProps = {
@@ -31,15 +32,15 @@ export function ReposCard({ repos: initialRepos }: ReposCardProps) {
     }, []);
 
     return (
-        <div className="border border-border bg-card flex flex-col overflow-hidden min-h-[400px] lg:min-h-0 lg:h-full">
-            <div className="p-2 border-b border-border flex items-center justify-between">
-                <h2 className="text-base sm:text-lg tracking-wide flex items-center gap-2">
+        <div className="border-border bg-card flex min-h-[400px] flex-col overflow-hidden border lg:h-full lg:min-h-0">
+            <div className="border-border flex items-center justify-between border-b p-2">
+                <h2 className="flex items-center gap-2 text-base tracking-wide sm:text-lg">
                     <Book className="size-4" />
                     Repositories
                 </h2>
                 <button
                     onClick={handleAddRepo}
-                    className="p-1 hover:bg-accent rounded-sm transition-colors"
+                    className="hover:bg-accent rounded-sm p-1 transition-colors"
                     aria-label="Add new repository"
                 >
                     <Plus className="size-4" />
@@ -54,7 +55,7 @@ export function ReposCard({ repos: initialRepos }: ReposCardProps) {
                         ))}
                     </AnimatePresence>
                 ) : (
-                    <div className="p-4 text-center text-muted-foreground text-sm">
+                    <div className="text-muted-foreground p-4 text-center text-sm">
                         No repositories found
                     </div>
                 )}

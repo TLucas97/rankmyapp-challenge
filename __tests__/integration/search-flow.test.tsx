@@ -5,10 +5,6 @@ import userEvent from '@testing-library/user-event';
 jest.mock('@/lib/gh', () => ({
   getUser: jest.fn(),
   getRepos: jest.fn(),
-  computeLanguageInsights: jest.fn((repos) => ({
-    byLanguageCount: {},
-    starsByLanguage: {},
-  })),
 }));
 
 const mockPush = jest.fn();

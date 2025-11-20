@@ -1,9 +1,9 @@
-import { computeLanguageInsights } from '@/lib/gh';
 import { GHRepo } from '@/lib/gh/types';
+import { aggregateLangStats } from '@/lib/utils';
 
-describe('computeLanguageInsights', () => {
+describe('aggregateLangStats', () => {
   it('should return empty objects for empty repos array', () => {
-    const result = computeLanguageInsights([]);
+    const result = aggregateLangStats([]);
     expect(result).toEqual({
       byLanguageCount: {},
       starsByLanguage: {},
@@ -41,7 +41,7 @@ describe('computeLanguageInsights', () => {
       },
     ];
 
-    const result = computeLanguageInsights(repos);
+    const result = aggregateLangStats(repos);
     expect(result.byLanguageCount).toEqual({
       TypeScript: 2,
       JavaScript: 1,
@@ -79,7 +79,7 @@ describe('computeLanguageInsights', () => {
       },
     ];
 
-    const result = computeLanguageInsights(repos);
+    const result = aggregateLangStats(repos);
     expect(result.starsByLanguage).toEqual({
       TypeScript: 15,
       JavaScript: 20,
@@ -108,7 +108,7 @@ describe('computeLanguageInsights', () => {
       },
     ];
 
-    const result = computeLanguageInsights(repos);
+    const result = aggregateLangStats(repos);
     expect(result.byLanguageCount).toEqual({
       Other: 2,
     });
@@ -130,7 +130,7 @@ describe('computeLanguageInsights', () => {
       },
     ];
 
-    const result = computeLanguageInsights(repos);
+    const result = aggregateLangStats(repos);
     expect(result.starsByLanguage).toEqual({
       TypeScript: 0,
     });
@@ -167,7 +167,7 @@ describe('computeLanguageInsights', () => {
       },
     ];
 
-    const result = computeLanguageInsights(repos);
+    const result = aggregateLangStats(repos);
     expect(result.byLanguageCount).toEqual({
       TypeScript: 1,
       Other: 1,

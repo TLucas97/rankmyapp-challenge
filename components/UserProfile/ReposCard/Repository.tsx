@@ -1,6 +1,7 @@
-import { GHRepo } from "@/lib/gh/types";
 import { Star } from "lucide-react";
 import { motion } from "motion/react";
+
+import { GHRepo } from "@/lib/gh/types";
 
 type RepositoryProps = {
     repo: GHRepo;
@@ -31,26 +32,24 @@ export function Repository({ repo }: RepositoryProps) {
                 ease: [0.4, 0, 0.2, 1],
             }}
             layout
-            className="border-b border-border p-4 last:border-b-0 hover:bg-accent/50 transition-colors cursor-pointer"
+            className="border-border hover:bg-accent/50 cursor-pointer border-b p-4 transition-colors last:border-b-0"
             onClick={() => window.open(repo.html_url, "_blank")}
         >
-            <div className="flex items-start justify-between gap-4 mb-2">
-                <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-semibold mb-1 truncate">
-                        {repo.name}
-                    </h3>
+            <div className="mb-2 flex items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                    <h3 className="mb-1 truncate text-base font-semibold">{repo.name}</h3>
                     {repo.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
+                        <p className="text-muted-foreground mb-2 line-clamp-2 text-sm">
                             {repo.description}
                         </p>
                     )}
                 </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs sm:gap-4">
                 {repo.language && (
                     <span className="flex items-center gap-1">
-                        <span className="size-3 rounded-full bg-primary" />
+                        <span className="bg-primary size-3 rounded-full" />
                         {repo.language}
                     </span>
                 )}
@@ -58,11 +57,10 @@ export function Repository({ repo }: RepositoryProps) {
                     <Star className="size-3" />
                     {repo.stargazers_count}
                 </span>
-                <span className="w-full sm:w-auto sm:ml-auto">
+                <span className="w-full sm:ml-auto sm:w-auto">
                     Updated {formatDate(repo.updated_at)}
                 </span>
             </div>
         </motion.div>
     );
 }
-

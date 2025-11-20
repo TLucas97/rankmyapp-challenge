@@ -1,12 +1,12 @@
-import * as Sentry from '@sentry/nextjs';
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { buildMemoryStorage, setupCache } from 'axios-cache-interceptor';
-import axiosRetry from 'axios-retry';
+import * as Sentry from "@sentry/nextjs";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { buildMemoryStorage, setupCache } from "axios-cache-interceptor";
+import axiosRetry from "axios-retry";
 
 const baseApi = axios.create({
-    baseURL: 'https://api.github.com',
+    baseURL: "https://api.github.com",
     headers: {
-        Accept: 'application/vnd.github+json',
+        Accept: "application/vnd.github+json",
         ...(process.env.GITHUB_TOKEN && {
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         }),
@@ -36,7 +36,7 @@ axiosRetry(baseApi, {
     retries: 3,
 
     retryDelay: (retryCount: number, error: any) => {
-        const retryAfterHeader = error?.response?.headers?.['retry-after'];
+        const retryAfterHeader = error?.response?.headers?.["retry-after"];
         const retryAfterMs = parseRetryAfter(retryAfterHeader);
 
         if (retryAfterMs !== null) {
@@ -51,7 +51,7 @@ axiosRetry(baseApi, {
     },
 
     retryCondition: (error: any) => {
-        if (error.code === 'ECONNABORTED') return true;
+        if (error.code === "ECONNABORTED") return true;
         if (!error.response) return true;
 
         const status = error.response.status;
@@ -73,20 +73,18 @@ baseApi.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
         const status = error.response?.status;
-        const shouldCapture =
-            !status ||
-            (status >= 500 && status < 600);
+        const shouldCapture = !status || (status >= 500 && status < 600);
 
         if (shouldCapture) {
             Sentry.captureException(error, {
                 tags: {
-                    error_type: 'api_error',
-                    api_endpoint: error.config?.url || 'unknown',
+                    error_type: "api_error",
+                    api_endpoint: error.config?.url || "unknown",
                 },
                 contexts: {
                     http: {
-                        method: error.config?.method?.toUpperCase() || 'unknown',
-                        url: error.config?.url || 'unknown',
+                        method: error.config?.method?.toUpperCase() || "unknown",
+                        url: error.config?.url || "unknown",
                         status_code: error.response?.status,
                     },
                 },
@@ -110,7 +108,7 @@ export const api = setupCache(baseApi, {
 
     interpretHeader: false,
 
-    methods: ['get'],
+    methods: ["get"],
 
     generateKey: (request) => {
         return `${request.method}:${request.baseURL}${request.url}`;
