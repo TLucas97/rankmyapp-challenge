@@ -4,7 +4,7 @@ import { ModeToggle } from "./ModeToggle";
 
 export function Header() {
     return (
-        <header className="bg-background sticky top-0 z-10 mx-auto flex w-full items-center justify-between border-b px-4 py-2">
+        <header className="bg-background sticky top-0 z-50 mx-auto flex w-full items-center justify-between border-b px-4 py-2">
             <div className="mx-auto flex w-full max-w-7xl justify-between">
                 <div className="flex items-center">
                     <Link href="/">
